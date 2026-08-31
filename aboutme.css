@@ -1,0 +1,600 @@
+/* ===========================================================
+   ArcnaDev — About Me
+   Deep maroon-to-black backdrop, coral accent, rounded
+   heavyweight display type, glowing circular portrait.
+   =========================================================== */
+
+@import url('https://fonts.googleapis.com/css2?family=Baloo+2:wght@500;600;700;800&family=Nunito:wght@400;500;600;700&display=swap');
+
+:root {
+  --bg-0:        #0c0507;
+  --bg-1:        #22060d;
+  --bg-2:        #460d1b;
+  --panel:       rgba(255, 255, 255, 0.04);
+  --panel-border:rgba(255, 255, 255, 0.09);
+  --text:        #f5eef0;
+  --text-dim:    #cdb9bf;
+  --accent:      #ff5d7a;
+  --accent-2:    #ff8a5c;
+  --accent-soft: rgba(255, 93, 122, 0.16);
+
+  --font-display: 'Baloo 2', sans-serif;
+  --font-body:    'Nunito', sans-serif;
+
+  --content-w: 1220px;
+  --nav-h: 92px;
+}
+
+*, *::before, *::after { box-sizing: border-box; }
+html { scroll-behavior: smooth; }
+
+body {
+  margin: 0;
+  position: relative;
+  display: grid;
+  grid-template-columns: 1fr min(var(--content-w), 92%) 1fr;
+  grid-auto-rows: min-content;
+  background-color: var(--bg-0);
+  background-image:
+    radial-gradient(ellipse 780px 620px at 80% 42%, rgba(255, 205, 210, 0.16), transparent 60%),
+    radial-gradient(ellipse 1000px 850px at 78% 46%, rgba(216, 34, 68, 0.55), transparent 65%),
+    radial-gradient(ellipse 1500px 1200px at 46% 20%, var(--bg-2), transparent 70%),
+    linear-gradient(180deg, var(--bg-1), var(--bg-0) 55%);
+  color: var(--text);
+  font-family: var(--font-body);
+  font-size: 16px;
+  line-height: 1.7;
+  -webkit-font-smoothing: antialiased;
+  overflow-x: hidden;
+}
+
+body > * { grid-column: 2; position: relative; z-index: 1; }
+
+img { max-width: 100%; display: block; }
+a { color: inherit; text-decoration: none; }
+button { font-family: inherit; cursor: pointer; border: none; background: none; color: inherit; }
+
+/* -----------------------------------------------------------
+   Nav
+   ----------------------------------------------------------- */
+nav {
+  grid-column: 1 / -1;
+  grid-row: 1;
+  position: sticky;
+  top: 0;
+  z-index: 20;
+  height: var(--nav-h);
+  background: linear-gradient(180deg, rgba(12, 5, 7, 0.92), rgba(12, 5, 7, 0.65));
+  backdrop-filter: blur(10px);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+}
+
+nav ul { list-style: none; margin: 0; padding: 0; height: 100%; max-width: var(--content-w); width: 92%; margin-inline: auto; }
+nav li { display: flex; align-items: center; justify-content: flex-end; gap: clamp(1.5rem, 3vw, 2.75rem); height: 100%; }
+
+nav a {
+  position: relative;
+  font-family: var(--font-display);
+  font-weight: 600;
+  font-size: 1.05rem;
+  color: var(--text);
+  padding-bottom: 6px;
+  transition: color 0.25s ease;
+}
+
+nav a::after {
+  content: '';
+  position: absolute;
+  left: 0; bottom: 0;
+  width: 0; height: 2px;
+  border-radius: 2px;
+  background: linear-gradient(90deg, var(--accent), var(--accent-2));
+  transition: width 0.28s ease;
+}
+
+nav a:hover, nav a:focus-visible { color: var(--accent); }
+nav a:hover::after, nav a:focus-visible::after { width: 100%; }
+nav a[href*="ABOUT" i] { color: var(--accent); }
+nav a[href*="ABOUT" i]::after { width: 100%; }
+
+/* Logo overlaid on the nav row */
+body > h1 {
+  grid-row: 1;
+  justify-self: start;
+  align-self: center;
+  position: sticky;
+  top: 0;
+  z-index: 25;
+  margin: 0;
+  height: var(--nav-h);
+  display: flex;
+  align-items: center;
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: 1.4rem;
+  color: var(--accent);
+}
+
+/* -----------------------------------------------------------
+   Hero — .aboutme-head1 (kicker + tagline + photo) and
+   .aboutme-head2 (name + bio) share the same grid row so the
+   photo sits beside both, without any absolute positioning.
+   ----------------------------------------------------------- */
+.aboutme-head1 {
+  grid-row: 2;
+  display: grid;
+  grid-template-columns: 1fr auto;
+  column-gap: clamp(1.5rem, 4vw, 3rem);
+  align-items: start;
+  padding-top: clamp(2rem, 5vw, 3.5rem);
+}
+
+.aboutme-head1 h1 {
+  grid-column: 1;
+  grid-row: 1;
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: 0.9rem;
+  color: var(--accent);
+  margin: 0 0 0.4rem;
+}
+
+p.aboutme-head1 {
+  grid-column: 1;
+  grid-row: 2;
+  font-family: var(--font-body);
+  font-size: 1rem;
+  color: var(--text-dim);
+  margin: 0;
+  align-self: start;
+}
+
+.aboutme-head1 img {
+  grid-column: 2;
+  grid-row: 1 / 3;
+
+  justify-self: end;
+  align-self: start;
+
+  width: clamp(220px, 24vw, 380px);
+  height: clamp(220px, 24vw, 380px);
+
+  object-fit: cover;
+  border-radius: 50%;
+
+  background: radial-gradient(
+    circle at 35% 30%,
+    #efe7e9,
+    #b9a9ae 70%
+  );
+
+  box-shadow:
+    0 0 0 1px rgba(255, 255, 255, 0.15),
+
+    /* strong glow */
+    0 0 35px 8px rgba(250, 115, 115, 0.65),
+
+    /* soft bloom */
+    0 0 90px 25px rgba(250, 73, 102, 0.65),
+
+    /* wide bloom */
+    0 0 180px 60px rgba(0, 117, 252, 0.25),
+
+    /* depth shadow */
+    0 40px 90px -25px rgba(0, 0, 0, 0.7);
+
+  transition: transform 0.4s ease, box-shadow 0.4s ease;
+}
+.aboutme-head1 img:hover {
+  transform: translateY(-6px) scale(1.015);
+  box-shadow:
+    0 0 0 1px rgba(255, 255, 255, 0.16),
+    0 0 90px 18px rgba(255, 93, 122, 0.4),
+    0 0 180px 70px rgba(255, 255, 255, 0.08),
+    0 46px 100px -25px rgba(0, 0, 0, 0.75);
+}
+
+/* -----------------------------------------------------------
+   Theme switch button
+   ----------------------------------------------------------- */
+#theme-switch {
+  position: fixed;
+  top: 20px;
+  right: 20px;
+  z-index: 30;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  background: var(--panel);
+  border: 1px solid var(--panel-border);
+  backdrop-filter: blur(6px);
+  transition: transform 0.2s ease, border-color 0.2s ease;
+}
+
+#theme-switch:hover {
+  transform: scale(1.08);
+  border-color: var(--accent);
+}
+
+#theme-switch img {
+  position: absolute;
+  width: 22px;
+  height: 22px;
+  transition: opacity 0.25s ease, transform 0.25s ease;
+}
+
+/* dark mode = default: show moon, hide sun */
+#theme-switch img[alt="theme-switch2"] {
+  opacity: 0;
+  transform: rotate(-90deg) scale(0.5);
+}
+
+/* light mode: hide moon, show sun */
+body.light-mode #theme-switch img[alt="theme-switch1"] {
+  opacity: 0;
+  transform: rotate(90deg) scale(0.5);
+}
+body.light-mode #theme-switch img[alt="theme-switch2"] {
+  opacity: 1;
+  transform: rotate(0) scale(1);
+}
+
+/* icons are white PNGs, invert them so they're visible on light bg */
+body.light-mode #theme-switch img {
+  filter: invert(1) brightness(0.3);
+}
+
+/* -----------------------------------------------------------
+   Light mode palette override
+   ----------------------------------------------------------- */
+body.light-mode {
+  --bg-0:        #fdf6f7;
+  --bg-1:        #fff0f2;
+  --bg-2:        #ffd9e0;
+  --panel:       rgba(0, 0, 0, 0.035);
+  --panel-border:rgba(0, 0, 0, 0.1);
+  --text:        #2b1216;
+  --text-dim:    #6b4a50;
+
+  background-image:
+    radial-gradient(ellipse 780px 620px at 80% 42%, rgba(255, 205, 210, 0.4), transparent 60%),
+    radial-gradient(ellipse 1000px 850px at 78% 46%, rgba(255, 150, 165, 0.35), transparent 65%),
+    radial-gradient(ellipse 1500px 1200px at 46% 20%, var(--bg-2), transparent 70%),
+    linear-gradient(180deg, var(--bg-1), var(--bg-0) 55%);
+}
+
+body.light-mode nav {
+  background: linear-gradient(180deg, rgba(253, 246, 247, 0.92), rgba(253, 246, 247, 0.65));
+  border-bottom: 1px solid rgba(0, 0, 0, 0.06);
+}
+
+/* Name + bio — placed in the SAME row as .aboutme-head1 so it
+   sits beside the photo, but capped to a safe width so it can
+   never run underneath it. */
+.aboutme-head2 {
+  grid-row: 2;
+  justify-self: start;
+  align-self: start;
+  max-width: 600px;
+  width: 100%;
+  padding-top: clamp(4.5rem, 9vw, 6.5rem);
+}
+
+.aboutme-head2 h2 { font-family: var(--font-display); margin: 0; line-height: 1.18; }
+.aboutme-head2 h2:first-of-type { font-size: clamp(1.9rem, 4vw, 2.6rem); font-weight: 600; color: var(--accent); }
+.aboutme-head2 h2:last-of-type { font-size: clamp(2.1rem, 4.6vw, 3.1rem); font-weight: 700; color: var(--text); margin-bottom: 1.4rem; }
+.aboutme-head2 p { margin: 0 0 0.6rem; color: var(--text-dim); font-size: 1.05rem; line-height: 1.85; }
+
+/* -----------------------------------------------------------
+   Quote (.aboutme-head3)
+   The source HTML nests a <p> inside a <p>, which the browser
+   auto-closes — leaving an empty boxed .aboutme-head3 and an
+   unstyled sibling <p> holding the real text. This rule hides
+   the empty box and puts the quote styling on the real text
+   instead, so it renders correctly either way. Fixing the
+   nested <p> in the HTML (see note) is the cleaner long-term fix.
+   ----------------------------------------------------------- */
+.aboutme-head3:empty { display: none; }
+
+.aboutme-head3,
+.aboutme-head3 + p {
+  position: relative;
+  max-width: 600px;
+  margin: 1.75rem 0 2rem;
+  padding: 1.3rem 1.6rem 1.3rem 3rem;
+  border: 1px solid var(--panel-border);
+  background: var(--panel);
+  border-radius: 14px;
+  font-family: var(--font-display);
+  font-style: italic;
+  font-weight: 500;
+  font-size: 1.05rem;
+  color: var(--text);
+}
+
+.aboutme-head3::before,
+.aboutme-head3 + p::before {
+  content: '\201C';
+  position: absolute;
+  left: 1rem;
+  top: 0.4rem;
+  font-family: Georgia, serif;
+  font-size: 2.4rem;
+  font-style: normal;
+  color: var(--accent);
+  line-height: 1;
+}
+
+/* -----------------------------------------------------------
+   Buttons (.aboutme-head4 / .aboutme-head5)
+   justify-self keeps them pill-sized instead of stretching
+   to the full grid column width.
+   ----------------------------------------------------------- */
+.aboutme-head4,
+.aboutme-head5 {
+  justify-self: start;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.65rem;
+  padding: 0.95rem 1.7rem;
+  border-radius: 12px;
+  font-family: var(--font-display);
+  font-size: 1rem;
+  font-weight: 600;
+  margin: 0 0.9rem 1rem 0;
+  transition: transform 0.2s ease, box-shadow 0.2s ease, border-color 0.2s ease, background 0.2s ease;
+}
+
+.aboutme-head4 {
+  background: linear-gradient(120deg, var(--accent) 0%, var(--accent-2) 100%);
+  color: #1a0509;
+  box-shadow: 0 14px 30px -14px rgba(255, 93, 122, 0.7);
+}
+
+.aboutme-head4:hover, .aboutme-head4:focus-visible {
+  transform: translateY(-3px);
+  box-shadow: 0 20px 40px -14px rgba(255, 93, 122, 0.85);
+}
+
+.aboutme-head5 {
+  background: transparent;
+  color: var(--accent);
+  border: 1.5px solid rgba(255, 93, 122, 0.45);
+}
+
+.aboutme-head5:hover, .aboutme-head5:focus-visible {
+  border-color: var(--accent);
+  background: var(--accent-soft);
+  transform: translateY(-3px);
+}
+
+.aboutme-head4 img, .aboutme-head5 img { transition: transform 0.25s ease; filter: brightness(0) saturate(100%); }
+.aboutme-head5 img { filter: none; }
+.aboutme-head4:hover img, .aboutme-head5:hover img { transform: translateX(3px); }
+
+/* -----------------------------------------------------------
+   Buttons wrapper
+   ----------------------------------------------------------- */
+.aboutme-buttons {
+  justify-self: start;
+  display: flex;
+  flex-wrap: wrap;
+}
+
+/* -----------------------------------------------------------
+   Stats cards row (.stats-row / .stat-card)
+   Replaces the old .aboutme-description / .aboutme-description1
+   stacked strips with three matching cards: icon badge, label,
+   big number, description, live indicator + progress bar, and
+   an arrow tucked into the bottom-right corner.
+   ----------------------------------------------------------- */
+.stats-row {
+  justify-self: start;
+  display: flex;
+  gap: 2rem;
+  flex-wrap: wrap;
+  max-width: 100%;   /* buksan sa buong width, dati 700px lang */
+  width: 100%;
+  margin: 1rem 0 4.5rem;
+  padding-top: 1.5rem;
+  border-top: 1px solid var(--panel-border);
+}
+.stats-row2 {
+  justify-self: start;
+  display: flex;
+  gap: 2rem;
+  flex-wrap: wrap;
+  max-width: 400px;
+  width: 100%;
+  margin: 1rem 0 4.5rem;
+  padding-top: 1.5rem;
+  border-top: 1px solid var(--panel-border);
+}
+
+.stat-desc img {
+  display: inline-block;
+  vertical-align: middle;
+  margin: 0.3rem 1rem 0 0;
+}
+
+.stats-row3 {
+  justify-self: start;
+  display: flex;
+  gap: 2rem;
+  flex-wrap: wrap;
+  max-width: 500px;
+  width: 100%;
+  margin: 1rem 0 4.5rem;
+  padding-top: 1.5rem;
+  border-top: 1px solid var(--panel-border);
+}
+
+.stat-card {
+  position: relative;
+  flex: 1 1 260px;
+  background: var(--panel);
+  border: 1px solid var(--panel-border);
+  border-radius: 16px;
+  padding: 1.3rem 1.4rem 1.4rem;
+  overflow: hidden;
+  transition: transform 0.25s ease, border-color 0.25s ease;
+}
+
+.stat-card:hover {
+  transform: translateY(-4px);
+  border-color: rgba(255, 93, 122, 0.4);
+}
+
+.stat-top {
+  display: flex;
+  align-items: center;
+  gap: 0.65rem;
+  margin-bottom: 0.85rem;
+}
+
+.stat-icon {
+  flex: none;
+  width: 32px;
+  height: 32px;
+  border-radius: 10px;
+  background: var(--accent-soft);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: transform 0.3s ease, background 0.3s ease;
+}
+
+.stat-card:hover .stat-icon {
+  transform: rotate(-8deg) scale(1.08);
+  background: var(--accent);
+}
+
+.stat-icon img {
+  width: 16px;
+  height: 16px;
+  object-fit: contain;
+}
+
+.stat-label {
+  font-family: var(--font-display);
+  font-size: 0.68rem;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  color: var(--text-dim);
+  text-transform: uppercase;
+}
+
+.stat-number {
+  margin-left: auto;
+  font-family: var(--font-display);
+  font-weight: 800;
+  font-size: 1.7rem;
+  color: var(--text);
+  line-height: 1;
+}
+
+.stat-desc {
+  margin: 0 0 1.1rem;
+  font-size: 0.88rem;
+  line-height: 1.5;
+  color: var(--text-dim);
+  max-width: 88%;
+}
+
+.stat-footer {
+  display: flex;
+  align-items: center;
+  gap: 0.55rem;
+}
+
+.stat-live {
+  flex: none;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35rem;
+  font-family: var(--font-body);
+  font-size: 0.7rem;
+  font-weight: 600;
+  color: var(--accent);
+  white-space: nowrap;
+}
+
+.stat-live::before {
+  content: '';
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: var(--accent);
+  box-shadow: 0 0 6px 1px var(--accent);
+}
+
+.stat-bar {
+  flex: 1;
+  height: 4px;
+  border-radius: 4px;
+  background: rgba(255, 255, 255, 0.08);
+  overflow: hidden;
+}
+
+.stat-bar-fill {
+  display: block;
+  height: 100%;
+  border-radius: 4px;
+  background: linear-gradient(90deg, var(--accent), var(--accent-2));
+}
+
+.stat-arrow {
+  position: absolute;
+  right: 0.85rem;
+  bottom: 0.75rem;
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  border: 1px solid var(--panel-border);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 0.7rem;
+  color: var(--text-dim);
+}
+
+/* -----------------------------------------------------------
+   Responsive — collapse the shared-row hero back to a single
+   stacked column below 900px.
+   ----------------------------------------------------------- */
+@media (max-width: 900px) {
+  .aboutme-head1 {
+    grid-template-columns: 1fr;
+    row-gap: 1.5rem;
+  }
+  .aboutme-head1 h1 { grid-column: 1; grid-row: 1; }
+  p.aboutme-head1 { grid-column: 1; grid-row: 2; }
+  .aboutme-head1 img {
+    grid-column: 1;
+    grid-row: 3;
+    justify-self: center;
+    width: 220px;
+    height: 220px;
+  }
+
+  .aboutme-head2 { grid-row: auto; padding-top: 2rem; max-width: 100%; }
+  .aboutme-head3, .aboutme-head3 + p, .stats-row { max-width: 100%; }
+
+  nav li { justify-content: center; flex-wrap: wrap; gap: 1.25rem; }
+  body > h1 { justify-self: center; }
+}
+
+/* -----------------------------------------------------------
+   Accessibility
+   ----------------------------------------------------------- */
+a:focus-visible, button:focus-visible { outline: 2px solid var(--accent); outline-offset: 3px; }
+
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    transition-duration: 0.01ms !important;
+  }
+}
